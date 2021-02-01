@@ -1,0 +1,4 @@
+com\kebo\po\SysUser.class
+com\kebo\provider\SysRoleProvider.class
+com\kebo\po\SysRole.class
+com\kebo\mapper\RoleMapper.class

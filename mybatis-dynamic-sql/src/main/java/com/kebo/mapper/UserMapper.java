@@ -3,6 +3,7 @@ package com.kebo.mapper;
 import com.kebo.po.SysUser;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
 
@@ -39,4 +40,36 @@ public interface UserMapper {
 	 * @return
 	 */
 	SysUser selectByIdOrUserName(SysUser sysUser);
+
+	/**
+	 * 根据用户 id 集合查询
+	 *
+	 * @param idList
+	 * @return
+	 */
+	List<SysUser> selectByIdList(List<Long> idList);
+
+	/**
+	 * 根据用户 id 数组查询
+	 *
+	 * @param idList
+	 * @return
+	 */
+	List<SysUser> selectByIdArray(Long[] idList);
+
+	/**
+	 * 批量插入用户信息
+	 *
+	 * @param userList
+	 * @return
+	 */
+	int insertList(List<SysUser> userList);
+
+	/**
+	 * 通过 Map 更新列
+	 *
+	 * @param map
+	 * @return
+	 */
+	int updateByMap(Map<String, Object> map);
 }

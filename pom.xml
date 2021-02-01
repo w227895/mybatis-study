@@ -13,6 +13,7 @@
         <module>mybatis-xml</module>
         <module>mybatis-annotation</module>
         <module>mybatis-dynamic-sql</module>
+        <module>mybatis-cache</module>
     </modules>
 
     <properties>
