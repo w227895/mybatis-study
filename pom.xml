@@ -11,6 +11,7 @@
     <modules>
         <module>mybatis-start</module>
         <module>mybatis-xml</module>
+        <module>mybatis-annotation</module>
     </modules>
 
     <properties>
