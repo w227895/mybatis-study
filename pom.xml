@@ -12,6 +12,7 @@
         <module>mybatis-start</module>
         <module>mybatis-xml</module>
         <module>mybatis-annotation</module>
+        <module>mybatis-dynamic-sql</module>
     </modules>
 
     <properties>

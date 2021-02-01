@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mybatis-xml</artifactId>
+    <artifactId>mybatis-dynamic-sql</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -69,4 +69,7 @@
             </resource>
         </resources>
     </build>
+
+
+
 </project>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kebo.mapper.UserMapper">
+    <resultMap id="userMap" type="com.kebo.po.SysUser">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userPassword" column="user_password"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="userInfo" column="user_info"/>
+        <result property="headImg" column="head_img" jdbcType="BLOB"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="selectByUser" resultType="com.kebo.po.SysUser">
+        select id,
+        user_name userName,
+        user_password userPassword,
+        user_email userEmail,
+        user_info userInfo,
+        head_img headImg,
+        create_time createTime
+        from sys_user
+        <where>
+            <if test="userName !=null and userName !=''">
+                and user_name like concat('%', #{userName}, '%')
+            </if>
+            <if test="userEmail != '' and userEmail != null">
+                and user_email = #{userEmail}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateByIdSelective">
+        update sys_user
+        set
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
+            </if>
+            <if test="userPassword != null and userPassword != ''">
+                user_password = #{userPassword},
+            </if>
+            <if test="userEmail != null and userEmail != ''">
+                user_email = #{userEmail},
+            </if>
+            <if test="userInfo != null and userInfo != ''">
+                user_info = #{userInfo},
+            </if>
+            <if test="headImg != null">
+                head_img = #{headImg, jdbcType=BLOB},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime, jdbcType=TIMESTAMP},
+            </if>
+            id = #{id}
+        where id = #{id}
+    </update>
+
+    <insert id="insert2" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_user(
+        user_name, user_password,
+        <if test="userEmail != null">
+            <if test="userEmail != ''">
+                user_email,
+            </if>
+        </if>
+        user_info, head_img, create_time)
+        values(
+        #{userName}, #{userPassword},
+        <if test="userEmail != null">
+            <if test="userEmail != ''">
+                #{userEmail},
+            </if>
+        </if>
+        #{userInfo}, #{headImg, jdbcType=BLOB}, #{createTime, jdbcType=TIMESTAMP})
+    </insert>
+
+    <select id="selectByIdOrUserName" resultType="com.kebo.po.SysUser">
+        select id,
+        user_name userName,
+        user_password userPassword,
+        user_email userEmail,
+        user_info userInfo,
+        head_img headImg,
+        create_time createTime
+        from sys_user
+       /* 如果id不为空，那么用id查，后面的不执行，如果id为空，userName不为空，那么用userName查，否则用limit 0查*/
+       <!-- 此处where 1=1不能改成<where></where>,因为无法执行最后一个limit0的条件-->
+        where 1= 1
+            <choose>
+                <when test="id != null">
+                    and id = #{id}
+                </when>
+                <when test="userName != null and userName != ''">
+                    and user_name = #{userName}
+                </when>
+                <otherwise>
+                    limit 0
+                </otherwise>
+            </choose>
+    </select>
+</mapper>
