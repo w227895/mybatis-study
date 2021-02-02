@@ -14,6 +14,8 @@
         <module>mybatis-annotation</module>
         <module>mybatis-dynamic-sql</module>
         <module>mybatis-cache</module>
+        <module>mybatis-plugin</module>
+        <module>mybatis-advanced-query</module>
     </modules>
 
     <properties>
