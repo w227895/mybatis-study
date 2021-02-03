@@ -1,9 +1,14 @@
 package com.kebo.mapper;
 
 import com.kebo.po.SysUser;
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.io.Reader;
 
 /**
  * @description:
@@ -13,7 +18,7 @@ import org.junit.Test;
 public class UserMapperTest extends BaseMapperTest {
 
     @Test
-    public void testSelectUserAndRoleById(){
+    public void testSelectUserAndRoleById() {
         //获取 sqlSession
         SqlSession sqlSession = getSqlSession();
         try {
@@ -32,7 +37,7 @@ public class UserMapperTest extends BaseMapperTest {
     }
 
     @Test
-    public void testSelectUserAndRoleById2(){
+    public void testSelectUserAndRoleById2() {
         //获取 sqlSession
         SqlSession sqlSession = getSqlSession();
         try {
@@ -51,7 +56,7 @@ public class UserMapperTest extends BaseMapperTest {
     }
 
     @Test
-    public void testSelectUserAndRoleByIdSelect(){
+    public void testSelectUserAndRoleByIdSelect() {
         //获取 sqlSession
         SqlSession sqlSession = getSqlSession();
         try {
@@ -72,5 +77,20 @@ public class UserMapperTest extends BaseMapperTest {
             //不要忘记关闭 sqlSession
             sqlSession.close();
         }
+    }
+
+
+    @Test
+    public void test() throws Exception {
+        //1.将配置文件转换为对应的流
+        Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
+        //2.获取SqlSessionFactory
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+        //3.获取SqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        //4.操作要操作的Mapper接口
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        //5.获取对应的实例对象
+        SysUser user = userMapper.selectUserAndRoleById(1001L);
     }
 }
