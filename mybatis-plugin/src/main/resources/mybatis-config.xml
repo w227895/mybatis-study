@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-   <!--指定log4j输出日志-->
+    <!--指定log4j输出日志-->
     <settings>
         <setting name="logImpl" value="LOG4J"/>
     </settings>
@@ -13,7 +13,10 @@
         <package name="com.kebo.po"/>
     </typeAliases>
     <plugins>
-         <plugin interceptor="com.kebo.plugin.CameHumpInterceptor"/>
+        <plugin interceptor="com.kebo.plugin.MyFirstPlugin">
+            <property name="username" value="root"/>
+            <property name="password" value="123456"/>
+        </plugin>
     </plugins>
     <!--数据库相关配置-->
     <environments default="development">
@@ -30,15 +33,15 @@
         </environment>
     </environments>
 
-<!--
-    <mappers>
-       &lt;!&ndash; <mapper resource="com/kebo/mapper/PrivilegeMapper.xml"/>
-        <mapper resource="com/kebo/mapper/RoleMapper.xml"/>
-        <mapper resource="com/kebo/mapper/RolePrivilegeMapper.xml"/>
-        <mapper resource="com/kebo/mapper/UserMapper.xml"/>
-        <mapper resource="com/kebo/mapper/UserRoleMapper.xml"/>&ndash;&gt;
-        <mapper resource="com/kebo/mapper/UserMapper.xml"/>
-    </mappers>-->
+    <!--
+        <mappers>
+           &lt;!&ndash; <mapper resource="com/kebo/mapper/PrivilegeMapper.xml"/>
+            <mapper resource="com/kebo/mapper/RoleMapper.xml"/>
+            <mapper resource="com/kebo/mapper/RolePrivilegeMapper.xml"/>
+            <mapper resource="com/kebo/mapper/UserMapper.xml"/>
+            <mapper resource="com/kebo/mapper/UserRoleMapper.xml"/>&ndash;&gt;
+            <mapper resource="com/kebo/mapper/UserMapper.xml"/>
+        </mappers>-->
     <mappers>
         <package name="com.kebo.mapper"/>
     </mappers>

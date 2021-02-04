@@ -79,7 +79,6 @@ public class UserMapperTest extends BaseMapperTest {
         }
     }
 
-
     @Test
     public void test() throws Exception {
         //1.将配置文件转换为对应的流
