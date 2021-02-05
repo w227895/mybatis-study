@@ -18,7 +18,7 @@ public class BaseMapperTest {
 
     private static SqlSessionFactory sqlSessionFactory;
 
-    @BeforeClass
+   /* @BeforeClass
     public static void init() {
         try {
             Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
@@ -27,7 +27,7 @@ public class BaseMapperTest {
         } catch (IOException ignore) {
             ignore.printStackTrace();
         }
-    }
+    }*/
 
     public static SqlSession getSqlSession() {
         return sqlSessionFactory.openSession();

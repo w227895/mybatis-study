@@ -27,10 +27,10 @@ public class MyFirstPlugin implements Interceptor {
      */
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        System.out.println("MyFirstPlugin...intercept"+invocation.getMethod());
+        System.out.println("MyFirstPlugin...intercept： "+invocation.getMethod());
         //动态的改变一下sql运行的参数，以前1号学生，实际查询5号学生
         Object target = invocation.getTarget();
-//        System.out.println("当前拦截到的对象"+invocation.getTarget());
+        System.out.println("当前拦截到的对象"+invocation.getTarget());
 
         //拿到StatementHandler==>ParameterHandler==>parameterObject
         //拿到target的元数据
@@ -41,7 +41,6 @@ public class MyFirstPlugin implements Interceptor {
         metaObject.setValue("parameterHandler.parameterObject",5);
         //放行的方法
         Object proceed = invocation.proceed();
-
         return proceed;
     }
 

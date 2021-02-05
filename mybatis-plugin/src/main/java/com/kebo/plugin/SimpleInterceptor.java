@@ -1,18 +1,14 @@
 package com.kebo.plugin;
 
-import java.util.Properties;
-
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.plugin.Interceptor;
-import org.apache.ibatis.plugin.Intercepts;
-import org.apache.ibatis.plugin.Invocation;
-import org.apache.ibatis.plugin.Plugin;
-import org.apache.ibatis.plugin.Signature;
+import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
-@Intercepts(@Signature(type = Executor.class, method = "query",
+import java.util.Properties;
+
+@Intercepts(@Signature(type =Executor.class, method = "query",
 			args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}))
 public class SimpleInterceptor implements Interceptor {
 	private String name;
@@ -21,21 +17,26 @@ public class SimpleInterceptor implements Interceptor {
 		this.name = name;
 	}
 
+	public SimpleInterceptor() {
+	}
+
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
-		System.out.println("进入拦截器：" + name);
+		System.out.println("进入拦截器A：" + name);
 		Object result = invocation.proceed();
-		System.out.println("跳出拦截器：" + name);
+		System.out.println("跳出拦截器A：" + name);
 		return result;
 	}
 
 	@Override
 	public Object plugin(Object target) {
+		System.out.println("生成代理对象A");
 		return Plugin.wrap(target, this);
 	}
 
 	@Override
 	public void setProperties(Properties properties) {
+		System.out.println("获取配置文件A");
 	}
 
 }

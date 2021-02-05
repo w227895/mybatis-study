@@ -13,6 +13,10 @@
         <package name="com.kebo.po"/>
     </typeAliases>
     <plugins>
+        <plugin interceptor="com.kebo.plugin.SimpleInterceptor">
+            <property name="username" value="root"/>
+            <property name="password" value="123456"/>
+        </plugin>
         <plugin interceptor="com.kebo.plugin.MyFirstPlugin">
             <property name="username" value="root"/>
             <property name="password" value="123456"/>
